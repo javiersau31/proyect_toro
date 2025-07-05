@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "proyecto-ventas-f",
   "version": "0.0.0",
   "scripts": {
@@ -36,5 +37,25 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
+=======
+  "name": "proyecto-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1"
+>>>>>>> d9661e4a455435f6afd7e53b81028e81e5f810fb
   }
 }
