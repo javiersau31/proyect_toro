@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { ArticulosComponent } from './articulos/articulos.component';
 import { RegistroComponent } from './registros/registros.component'; 
 
 export const appRoutes: Routes = [
@@ -6,4 +7,5 @@ export const appRoutes: Routes = [
   { path: 'registro', loadComponent: () => import('./registros/registros.component').then(m => m.RegistroComponent) },
   { path: 'login', loadComponent: () => import('./login/login.component').then(m => m.LoginComponent) },
   {path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent) },
+  { path: 'articulos', component: ArticulosComponent },
 ];

@@ -1,0 +1,50 @@
+<h2>Gestión de Artículos</h2>
+
+<form [formGroup]="articuloForm" (ngSubmit)="guardarArticulo()">
+  <label>Nombre:
+    <input formControlName="nombre">
+  </label>
+  <br>
+  <label>Descripción:
+    <input formControlName="descripcion">
+  </label>
+  <br>
+  <label>Precio:
+    <input type="number" formControlName="precio">
+  </label>
+  <br>
+  <label>Existencia:
+    <input type="number" formControlName="existencia">
+  </label>
+  <br>
+  <button type="submit">{{ modoEditar ? 'Actualizar' : 'Crear' }}</button>
+  <button type="button" *ngIf="modoEditar" (click)="cancelarEditar()">Cancelar</button>
+</form>
+
+<hr>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Existencia</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let art of articulos">
+      <td>{{ art.id_articulo }}</td>
+      <td>{{ art.nombre }}</td>
+      <td>{{ art.descripcion }}</td>
+      <td>{{ art.precio }}</td>
+      <td>{{ art.existencia }}</td>
+      <td>
+        <button (click)="editarArticulo(art)">Editar</button>
+        <button (click)="eliminarArticulo(art.id_articulo!)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
