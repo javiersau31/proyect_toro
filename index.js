@@ -7,6 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', require('./rutas/auth.rutas'));
+app.use('/api/articulos', require('./rutas/articulos.rutas'));
 
 
 const PORT = 3000;
