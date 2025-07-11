@@ -5,11 +5,24 @@
       <a routerLink="/registro" routerLinkActive="font-bold" class="hover:text-yellow-300">Registro</a>
     </li>
     <li *ngIf="!sesionActiva">
-      <a routerLink="/login" routerLinkActive="font-bold" class="hover:text-yellow-300">Iniciar Sesión</a>
+      <a routerLink="/login" routerLinkActive="font-bold" class="hover:text-yellow-300">Iniciar Sesion</a>
     </li>
     <li *ngIf="sesionActiva">
+      <a routerLink="/dashboard" routerLinkActive="font-bold" class="hover:text-yellow-300">Inicio</a>
+    </li>
+    <li *ngIf="sesionActiva">
+      <a routerLink="/clientes" routerLinkActive="font-bold" class="hover:text-yellow-300">Clientes</a>
+    </li>
+    <li *ngIf="sesionActiva">
+      <a routerLink="/articulos" routerLinkActive="font-bold" class="hover:text-yellow-300">Articulos</a>
+    </li>
+    <li *ngIf="sesionActiva">
+      <a routerLink="/ventas" routerLinkActive="font-bold" class="hover:text-yellow-300">Ventas</a>
+    </li>
+    
+    <li *ngIf="sesionActiva">
       <button (click)="cerrarSesion()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">
-        Cerrar sesión
+        Cerrar sesion
       </button>
     </li>
   </ul>

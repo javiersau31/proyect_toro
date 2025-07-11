@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registro',
@@ -19,7 +20,8 @@ export class RegistroComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.formulario = this.fb.group({
       nombre:      ['', Validators.required],
@@ -40,12 +42,12 @@ export class RegistroComponent {
     this.authService.registrarCliente(this.formulario.value)
       .subscribe({
         next: ({ mensaje }) => {
-          alert(mensaje);
+          this.toastr.success(mensaje, 'Éxito');
           this.formulario.reset();
           this.router.navigate(['/login']);
         },
         error: err => {
-          alert(err.error?.mensaje || 'Error en el registro');
+          this.toastr.error(err.error?.mensaje || 'Error al registrar el cliente', 'Error');
         }
       });
   }

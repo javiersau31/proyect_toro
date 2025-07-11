@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.loginForm = this.fb.group({
       usuario: ['', Validators.required],
@@ -34,15 +36,15 @@ export class LoginComponent {
       next: (resp) => {
         if (resp && resp.token) {
           this.authService.iniciarSesion(resp.token);
-          alert('Inicio de sesión exitoso');
+          this.toastr.success('Inicio de sesion exitoso', 'Éxito');
           this.loginForm.reset();
           this.router.navigate(['/dashboard']);
         } else {
-          alert('No se recibió el token en la respuesta');
+          this.toastr.error('Credenciales invalidas', 'Error');
         }
       },
       error: err => {
-        alert(err.error?.mensaje || 'Error en el inicio de sesión');
+        this.toastr.error(err.error?.mensaje || 'Error al iniciar sesion', 'Error');
       }
     });
 

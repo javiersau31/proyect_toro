@@ -1,0 +1,106 @@
+<div class="max-w-5xl mx-auto p-6">
+  <h1 class="text-3xl font-bold text-center text-blue-900 mb-8">Gestion de Clientes</h1>
+
+  <!-- Tabla de clientes -->
+  <div class="overflow-x-auto rounded-xl shadow-lg mb-8">
+  <table class="min-w-full bg-white text-sm text-left border border-gray-200">
+    <thead class="bg-blue-600 text-white uppercase text-xs">
+      <tr>
+        <th class="px-4 py-3">Nombre</th>
+        <th class="px-4 py-3">Dirección</th>
+        <th class="px-4 py-3">Teléfono</th>
+        <th class="px-4 py-3">Email</th>
+        <th class="px-4 py-3 text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes" class="border-b hover:bg-blue-50 transition duration-200">
+        <td class="px-4 py-3">{{ cliente.nombre }}</td>
+        <td class="px-4 py-3">{{ cliente.direccion }}</td>
+        <td class="px-4 py-3">{{ cliente.telefono }}</td>
+        <td class="px-4 py-3">{{ cliente.email }}</td>
+        <td class="px-4 py-3 text-center">
+          <div class="flex justify-center items-center space-x-3">
+            <button
+              class="text-blue-600 hover:text-blue-800 font-semibold"
+              (click)="activarEdicion(cliente)">
+              🖋️ Editar
+            </button>
+
+            <ng-container *ngIf="clienteAEliminar === cliente.id_cliente; else btnEliminar">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm text-gray-700">¿Seguro?</span>
+                <button
+                  class="text-red-600 hover:text-red-800 font-semibold"
+                  (click)="eliminarClienteConfirmado()">
+                  Sí
+                </button>
+                <button
+                  class="text-gray-500 hover:text-gray-700"
+                  (click)="cancelarEliminacion()">
+                  No
+                </button>
+              </div>
+            </ng-container>
+
+            <ng-template #btnEliminar>
+              <button
+                class="text-red-600 hover:text-red-800 font-semibold"
+                (click)="confirmarEliminacion(cliente.id_cliente)">
+                🗑️ Eliminar
+              </button>
+            </ng-template>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+  <!-- Formulario nuevo cliente -->
+  <div class="bg-white shadow-lg rounded-xl p-6">
+    <h2 class="text-xl font-semibold mb-4 text-gray-700">Agregar Nuevo Cliente</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input [(ngModel)]="nuevoCliente.nombre" placeholder="Nombre"
+             class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full" />
+      <input [(ngModel)]="nuevoCliente.direccion" placeholder="Dirección"
+             class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full" />
+      <input [(ngModel)]="nuevoCliente.telefono" placeholder="Teléfono" name="telefono" #telefono="ngModel"
+             class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full" />
+      <input [(ngModel)]="nuevoCliente.email" placeholder="Email"
+             class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full" />
+    </div>
+    <div class="mt-6 text-right">
+      <button class="bg-green-600 text-white px-6 py-2 rounded-xl hover:bg-green-700 transition" 
+              (click)="agregarCliente()">
+         Guardar Cliente
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="clienteEditando" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-xl p-6 w-full max-w-xl shadow-2xl relative animate-fade-in">
+    <h2 class="text-2xl font-semibold mb-4 text-blue-800 text-center">Editar Cliente</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input [(ngModel)]="clienteEditando.nombre" placeholder="Nombre"
+             class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full" />
+      <input [(ngModel)]="clienteEditando.direccion" placeholder="Dirección"
+             class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full" />
+      <input [(ngModel)]="clienteEditando.telefono" placeholder="Teléfono"
+             class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full" />
+      <input [(ngModel)]="clienteEditando.email" placeholder="Email"
+             class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full" />
+    </div>
+
+    <div class="mt-6 flex justify-end space-x-4">
+      <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400"
+              (click)="cancelarEdicion()">Cancelar</button>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              (click)="guardarEdicion()">Guardar Cambios</button>
+    </div>
+  </div>
+</div>
